@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow — Gestión de tareas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <header class="app__header">
+      <h1 class="app__title">TaskFlow</h1>
+      <p class="app__stats" id="stats" aria-live="polite">0 tareas · 0 pendientes</p>
+    </header>
+
+    <!-- REQUISITO 3: Formulario con submit para agregar tareas -->
+    <form class="task-form" id="task-form" novalidate>
+      <div class="task-form__row">
+        <label class="visually-hidden" for="descripcion">Descripción de la tarea</label>
+        <input
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="¿Qué hay que hacer?"
+          autocomplete="off"
+          required
+        />
+      </div>
+      <div class="task-form__row task-form__row--secondary">
+        <label for="fecha-limite">Fecha límite (opcional)</label>
+        <input type="datetime-local" id="fecha-limite" name="fechaLimite" />
+        <button type="submit" class="btn btn--primary" id="btn-submit">
+          <span class="btn__label">Agregar</span>
+          <span class="spinner" id="btn-spinner" hidden aria-hidden="true"></span>
+        </button>
+      </div>
+      <p class="task-form__error" id="form-error" role="alert" hidden></p>
+    </form>
+
+    <div class="toolbar">
+      <!-- REQUISITO 3: input con evento keyup para filtrado en tiempo real -->
+      <input
+        type="search"
+        id="buscador"
+        class="toolbar__search"
+        placeholder="Buscar tareas..."
+        aria-label="Buscar tareas"
+      />
+      <div class="toolbar__filters" id="filtros" role="group" aria-label="Filtrar por estado">
+        <button type="button" class="filter-btn is-active" data-filtro="todas">Todas</button>
+        <button type="button" class="filter-btn" data-filtro="pendiente">Pendientes</button>
+        <button type="button" class="filter-btn" data-filtro="completada">Completadas</button>
+      </div>
+    </div>
+
+    <main>
+      <ul class="task-list" id="task-list" aria-live="polite">
+        <!-- Las tareas se renderizan dinámicamente desde app.js -->
+      </ul>
+      <p class="empty-state" id="empty-state" hidden>No hay tareas para mostrar.</p>
+    </main>
+
+    <footer class="app__footer">
+      <p>Datos guardados localmente en tu navegador.</p>
+    </footer>
+  </div>
+
+  <!-- REQUISITO 4: Contenedor de notificaciones tipo toast -->
+  <div class="toast-container" id="toast-container" aria-live="assertive"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
